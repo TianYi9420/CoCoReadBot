@@ -52,6 +52,7 @@ def lineBot(op):
         if op.type == 26 or op.type == 25:
             msg = op.message
             text = msg.text
+            msg_id = msg.id
             receiver = msg.to
             sender = msg._from
             if msg.toType == 0:
@@ -142,12 +143,12 @@ def lineBot(op):
         if op.type == 65:
             try:
                 at = op.param1
-                msg.id = op.param2
+                msg_id = op.param2
                 if settings["reread"] == True:
-                    if msg.id in msg_dict:
-                        if msg_dict[msg.id]["from"] not in bl:
-                            cl.sendMessage(at,"[收回訊息者]\n%s\n[訊息內容]\n%s"%(cl.getContact(msg_dict[msg.id]["from"]).displayName,msg_dict[msg.id]["text"]))
-                        del msg_dict[msg.id]
+                    if msg_id in msg_dict:
+                        if msg_dict[msg_id]["from"] not in bl:
+                            cl.sendMessage(at,"[收回訊息者]\n%s\n[訊息內容]\n%s"%(cl.getContact(msg_dict[msg_id]["from"]).displayName,msg_dict[msg_id]["text"]))
+                        del msg_dict[msg_id]
                 else:
                     pass
             except Exception as e:
