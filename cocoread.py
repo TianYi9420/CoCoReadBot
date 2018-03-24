@@ -2,8 +2,7 @@
 from linepy import *
 from datetime import datetime
 import codecs, json, time, timeit
-#cl = LINE('LINE帳號','LINE密碼')
-cl = LINE("ErTzVdUbWP5bw6TTTTse.z+eOpBplMO1PsYShrS6LBG.Qp7e2sebX0roCCNONVUHKLChMKQi+oaIGmZXIUbhzOE=")
+cl = LINE('LINE帳號','LINE密碼')
 oepoll = OEPoll(cl)
 settingsOpen = codecs.open("temp.json","r","utf-8")
 settings = json.load(settingsOpen)
