@@ -2,12 +2,11 @@
 from linepy import *
 from datetime import datetime
 import codecs, json, time, timeit
-cl = LINE('LINE帳號','LINE密碼')
+cl = LINE()
 oepoll = OEPoll(cl)
 settingsOpen = codecs.open("temp.json","r","utf-8")
 settings = json.load(settingsOpen)
 clMID = cl.profile.mid
-admin=['u28d781fa3ba9783fd5144390352b0c24',clMID]
 wait2 = {
     'readPoint':{},
     'readMember':{},
@@ -45,6 +44,7 @@ def helpmessage():
 ╚═〘 Credits By: ©CoCo™  〙
 """
     return helpMessage
+admin=['u28d781fa3ba9783fd5144390352b0c24',clMID]
 def lineBot(op):
     try:
         if op.type == 0:
