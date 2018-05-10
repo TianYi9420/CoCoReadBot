@@ -130,12 +130,13 @@ def lineBot(op):
             try:
                 msg = op.message
                 if settings["reread"] == True:
-                    if msg.toType == 0:
-                        cl.log("[%s]"%(msg._from)+msg.text)
-                    else:
-                        cl.log("[%s]"%(msg.to)+msg.text)
-                    if msg.contentType == 0:
-                        msg_dict[msg.id] = {"text":msg.text,"from":msg._from,"createdTime":msg.createdTime}
+                    if msg.toType == 2:
+                        if msg.toType == 0:
+                            cl.log("[%s]"%(msg._from)+msg.text)
+                        else:
+                            cl.log("[%s]"%(msg.to)+msg.text)
+                        if msg.contentType == 0:
+                            msg_dict[msg.id] = {"text":msg.text,"from":msg._from,"createdTime":msg.createdTime}
                 else:
                     pass
             except Exception as e:
