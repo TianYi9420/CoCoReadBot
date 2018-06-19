@@ -38,9 +38,6 @@ def helpmessage():
 ╠➥ 「Speed」查看機器速度
 ╠➥ 「Set」查看設定
 ╠➥ 「Reread On/Off」查看收回 打開/關閉
-╠➥ 「Setread」設定已讀點
-╠➥ 「Lookread」查詢已讀點
-╠➥ 「Tagall」標註全部人
 ╚═〘 Credits By: ©CoCo™  〙
 """
     return helpMessage
@@ -70,29 +67,6 @@ def lineBot(op):
                     helpMessage = helpmessage()
                     cl.sendMessage(to, str(helpMessage))
                     cl.sendContact(to, "u28d781fa3ba9783fd5144390352b0c24")
-                elif msg.text in ["SR","Setread"]:
-                    cl.sendMessage(msg.to, "設置已讀點")
-                    try:
-                        del wait2['readPoint'][msg.to]
-                        del wait2['readMember'][msg.to]
-                    except:
-                        pass
-                    now2 = datetime.now()
-                    wait2['readPoint'][msg.to] = msg.id
-                    wait2['readMember'][msg.to] = ""
-                    wait2['setTime'][msg.to] = datetime.strftime(now2,"%H:%M")
-                    wait2['ROM'][msg.to] = {}
-                elif msg.text in ["LR","Lookread"]:
-                    if msg.to in wait2['readPoint']:
-                        if wait2["ROM"][msg.to].items() == []:
-                            chiya = ""
-                        else:
-                            chiya = ""
-                            for rom in wait2["ROM"][msg.to].items():
-                                chiya += rom[1] + "\n"
-                        cl.sendMessage(msg.to, "||已讀的人||%s\n[%s]" % (wait2['readMember'][msg.to],setTime[msg.to]))
-                    else:
-                        cl.sendMessage(msg.to, "請輸入SR設置已讀點")
                 elif text.lower() == 'speed':
                     time0 = timeit.timeit('"-".join(str(n) for n in range(100))', number=10000)
                     str1 = str(time0)
@@ -112,20 +86,6 @@ def lineBot(op):
                 elif text.lower() == 'reread off':
                     settings["reread"] = False
                     cl.sendMessage(to, "查詢收回關閉")
-                elif text.lower() == 'tagall':
-                    group = cl.getGroup(msg.to)
-                    nama = [contact.mid for contact in group.members]
-                    k = len(nama)//100
-                    for a in range(k+1):
-                        txt = u''
-                        s=0
-                        b=[]
-                        for i in group.members[a*100 : (a+1)*100]:
-                            b.append({"S":str(s), "E" :str(s+6), "M":i.mid})
-                            s += 7
-                            txt += u'@Alin \n'
-                        cl.sendMessage(to, text=txt, contentMetadata={u'MENTION': json.dumps({'MENTIONEES':b})}, contentType=0)
-                        cl.sendMessage(to, "總共 {} 個成員".format(str(len(nama))))
         if op.type == 26:
             try:
                 msg = op.message
@@ -154,19 +114,6 @@ def lineBot(op):
                     pass
             except Exception as e:
                 print(e)
-        if op.type == 55:
-            try:
-                if op.param1 in wait2['readPoint']:
-                    Name = cl.getContact(op.param2).displayName
-                    if Name in wait2['readMember'][op.param1]:
-                        pass
-                    else:
-                        wait2['readMember'][op.param1] += "\n[•]" + Name
-                        wait2['ROM'][op.param1][op.param2] = "[•]" + Name
-                else:
-                    pass
-            except:
-                pass
     except Exception as error:
         logError(error)
 while True:
